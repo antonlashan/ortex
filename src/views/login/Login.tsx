@@ -5,8 +5,9 @@ import {
   makeStyles,
   TextField,
   Typography,
+  IconButton,
+  InputAdornment,
 } from '@material-ui/core';
-import { IconButton, InputAdornment } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -22,10 +23,9 @@ type FormData = {
 const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0, 2),
   },
   container: {
     flexDirection: 'column',
