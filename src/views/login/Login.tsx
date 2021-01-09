@@ -4,7 +4,6 @@ import {
   CssBaseline,
   makeStyles,
   TextField,
-  Typography,
   IconButton,
   InputAdornment,
 } from '@material-ui/core';
@@ -38,9 +37,17 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: 40,
+    border: `2px solid ${theme.palette.primary.main}`,
+    padding: theme.spacing(3),
+    borderRadius: 2,
   },
   header: {
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(1),
+    textAlign: 'center',
+  },
+  headerImg: {
+    width: '50%',
+    filter: 'invert(1)',
   },
 }));
 
@@ -70,13 +77,12 @@ const Login = () => {
       <Container component='main' maxWidth='xs' className={classes.container}>
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography
-            // component='h2'
-            variant='h2'
-            classes={{ root: classes.header }}
-          >
-            Sign in
-          </Typography>
+          <div className={classes.header}>
+            <img
+              className={classes.headerImg}
+              src='https://ortex-static-files.s3.amazonaws.com/static/public/images/ortex_logo_v-white.svg'
+            />
+          </div>
           <form className={classes.form} onSubmit={handleFormSubmit}>
             <TextField
               type='email'
@@ -128,11 +134,12 @@ const Login = () => {
               type='submit'
               fullWidth
               variant='contained'
-              color='primary'
+              color='secondary'
               className={classes.submit}
               disabled={!formState.isValid}
+              size={'large'}
             >
-              Sign in
+              Login
             </Button>
           </form>
           <ResetPassword />

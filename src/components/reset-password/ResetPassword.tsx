@@ -83,8 +83,9 @@ export const ResetPassword = () => {
         open={open}
         onClose={handleClose}
         aria-labelledby='form-dialog-title'
+        maxWidth={'xs'}
       >
-        <DialogTitle id='form-dialog-title'>Password reset</DialogTitle>
+        <DialogTitle id='form-dialog-title'>Password Reset</DialogTitle>
         <DialogContent>
           <form onSubmit={handleFormSubmit}>
             <TextField
@@ -171,10 +172,10 @@ export const ResetPassword = () => {
               <Button
                 type='submit'
                 variant='contained'
-                color='primary'
+                color='secondary'
                 disabled={!formState.isValid}
               >
-                Submit
+                Reset
               </Button>
             </DialogActions>
           </form>

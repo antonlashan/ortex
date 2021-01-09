@@ -12,9 +12,9 @@ export const palette: PaletteOptions = {
   },
   secondary: {
     contrastText: white,
-    dark: colors.blue[900],
-    main: colors.blue['A400'],
-    light: colors.blue[900],
+    dark: colors.cyan[900],
+    main: '#01BFBD',
+    light: '#01bfbd2e',
   },
   success: {
     contrastText: white,

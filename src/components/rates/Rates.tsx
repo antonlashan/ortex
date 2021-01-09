@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    color: theme.palette.success.main,
-    background: theme.palette.success.light,
+    color: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.light,
     padding: theme.spacing(0, 2, 0, 2),
+    borderRadius: 2,
   },
   seperator: {
     margin: theme.spacing(0, 1, 0, 1),

@@ -7,6 +7,10 @@ const useStyles = makeStyles(() => ({
   flexGrow: {
     flexGrow: 1,
   },
+  title: {
+    textTransform: 'uppercase',
+    letterSpacing: '3px',
+  },
 }));
 
 const Topbar = () => {
@@ -15,7 +19,9 @@ const Topbar = () => {
   return (
     <AppBar>
       <Toolbar>
-        <Typography variant='h6'>Ortex</Typography>
+        <Typography className={classes.title} variant='h6'>
+          Ortex
+        </Typography>
         <div className={classes.flexGrow} />
         <Rates />
       </Toolbar>
