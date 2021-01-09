@@ -8,27 +8,26 @@ interface SocketData {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-  },
-  price: {
     color: theme.palette.success.main,
     background: theme.palette.success.light,
     padding: theme.spacing(0, 2, 0, 2),
   },
-  dt: {},
+  seperator: {
+    margin: theme.spacing(0, 1, 0, 1),
+  },
 }));
 
 export const Rates = () => {
   const classes = useStyles();
-  const [state, setSates] = useState<SocketData>({ price: '55', dt: '666' });
+  const [state, setSates] = useState<SocketData>({ price: '0', dt: '0' });
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const socket = new WebSocket(process.env.REACT_APP_WS!);
 
     socket.onopen = () => {
       console.log('Sending to server');
-      socket.send(`{"topic":"subscribe","to":"EURUSD:CUR"}`);
+      socket.send(`{"topic": "subscribe", "to": "EURUSD:CUR"}`);
     };
 
     socket.onmessage = (event) => {
@@ -49,12 +48,9 @@ export const Rates = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.price}>
-        <Typography variant='h6'>{state.price}</Typography>
-      </div>
-      <div className={classes.dt}>
-        <Typography variant='overline'>{state.dt}</Typography>
-      </div>
+      <Typography variant='h6'>{state.price}</Typography>{' '}
+      <span className={classes.seperator}>/</span>{' '}
+      <Typography variant='overline'>{state.dt}</Typography>
     </div>
   );
 };

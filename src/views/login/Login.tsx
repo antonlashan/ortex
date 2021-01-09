@@ -11,7 +11,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Rates, ResetPassword } from '../../components';
+import { ResetPassword } from '../../components';
 import { REG_EMAIL } from '../../utils/regex';
 
 type FormData = {
@@ -42,11 +42,6 @@ const useStyles = makeStyles((theme) => ({
   header: {
     marginBottom: theme.spacing(3),
   },
-  rates: {
-    position: 'fixed',
-    right: theme.spacing(3),
-    top: theme.spacing(10),
-  },
 }));
 
 const Login = () => {
@@ -72,9 +67,6 @@ const Login = () => {
 
   return (
     <>
-      <div className={classes.rates}>
-        <Rates />
-      </div>
       <Container component='main' maxWidth='xs' className={classes.container}>
         <CssBaseline />
         <div className={classes.paper}>

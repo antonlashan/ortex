@@ -22,9 +22,12 @@ type PasswordChangeFormData = {
   repeatPassword: string;
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   reset: {
     cursor: 'pointer',
+  },
+  actionPanel: {
+    padding: theme.spacing(2, 0, 2, 0),
   },
 }));
 
@@ -161,7 +164,7 @@ export const ResetPassword = () => {
               }}
             />
 
-            <DialogActions>
+            <DialogActions className={classes.actionPanel}>
               <Button onClick={handleClose} color='primary'>
                 Cancel
               </Button>
