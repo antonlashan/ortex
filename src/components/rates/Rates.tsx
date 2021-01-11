@@ -1,40 +1,76 @@
 import { makeStyles, Typography } from '@material-ui/core';
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
+import { getFormattedDate } from '../../utils/dates';
+
 interface SocketData {
-  price: string;
-  dt: string;
+  price: number;
+  dt: number;
+  prev: number;
+  topic: string;
 }
+
+interface RatesState {
+  price: number;
+  datetime: string;
+  updown: 'priceUP' | 'priceDOWN';
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    color: theme.palette.secondary.main,
-    backgroundColor: theme.palette.secondary.light,
-    padding: theme.spacing(0, 2, 0, 2),
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: theme.spacing(0.5, 0, 0.5, 0),
     borderRadius: 2,
   },
-  seperator: {
-    margin: theme.spacing(0, 1, 0, 1),
+  price: {
+    padding: theme.spacing(0, 1, 0, 1),
+    display: 'flex',
+    alignItems: 'center',
+  },
+  currency: {
+    marginRight: theme.spacing(1),
+  },
+  priceUP: {
+    color: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.light,
+  },
+  priceDOWN: {
+    color: theme.palette.warning.dark,
+    backgroundColor: theme.palette.warning.light,
   },
 }));
 
+const currency = 'EURUSD';
+
 export const Rates = () => {
   const classes = useStyles();
-  const [state, setSates] = useState<SocketData>({ price: '0', dt: '0' });
+  const [state, setSates] = useState<RatesState>({
+    price: 0,
+    datetime: '',
+    updown: 'priceUP',
+  });
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const socket = new WebSocket(process.env.REACT_APP_WS!);
 
     socket.onopen = () => {
-      console.log('Sending to server');
-      socket.send(`{"topic": "subscribe", "to": "EURUSD:CUR"}`);
+      socket.send(`{"topic": "subscribe", "to": "${currency}:CUR"}`);
     };
 
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data) as SocketData;
-      console.log(data);
-      setSates({ price: '12', dt: '999' });
+      if (data.topic === currency) {
+        // console.log(data.prev , data.price)
+        setSates({
+          price: data.price,
+          datetime: getFormattedDate(data.dt),
+          updown: data.prev < data.price ? 'priceUP' : 'priceDOWN',
+        });
+      }
     };
 
     socket.onerror = function (error) {
@@ -49,9 +85,18 @@ export const Rates = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant='h6'>{state.price}</Typography>{' '}
-      <span className={classes.seperator}>/</span>{' '}
-      <Typography variant='overline'>{state.dt}</Typography>
+      <div className={clsx(classes.price, classes[state.updown])}>
+        <Typography className={classes.currency} variant='overline'>
+          {currency}
+        </Typography>
+        <Typography variant='subtitle2'>{state.price}</Typography>
+      </div>
+      <div>
+        <Typography className={classes.currency} variant='overline'>
+          Now
+        </Typography>
+        <Typography variant='overline'>{state.datetime}</Typography>
+      </div>
     </div>
   );
 };
