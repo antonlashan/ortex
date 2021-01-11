@@ -2,6 +2,30 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup
+
+1. Clone the project `git clone https://github.com/antonlashan/ortex.git`
+2. Install dependancies `yarn` or `npm i`
+3. Run `yarn start` or `npm run start`
+
+## Open static webpage
+
+1. Install [Http-server](https://www.npmjs.com/package/http-server)
+2. Build the project `yarn build`
+3. Change directory `hs build`
+4. Open browser [web](http://127.0.0.1:8080/login)
+
+### OR
+
+1. Build the project `yarn build`
+2. Copy `build` forder to any apache / nginx server
+3. Open `build` folder in browser
+
+### OR
+
+1. Copy `dist` forder to any apache / nginx server
+2. Open `dist` folder in browser
+
 ## Available Scripts
 
 In the project directory, you can run:
