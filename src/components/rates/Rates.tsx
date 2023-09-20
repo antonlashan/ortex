@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const currency = 'EURUSD';
+const currency = `EURUSD:CUR`;
 
 export const Rates = () => {
   const classes = useStyles();
@@ -58,13 +58,13 @@ export const Rates = () => {
     const socket = new WebSocket(process.env.REACT_APP_WS!);
 
     socket.onopen = () => {
-      socket.send(`{"topic": "subscribe", "to": "${currency}:CUR"}`);
+      socket.send(`{"topic": "subscribe", "to": "${currency}"}`);
     };
 
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data) as SocketData;
+
       if (data.topic === currency) {
-        // console.log(data.prev , data.price)
         setSates({
           price: data.price,
           datetime: getFormattedDate(data.dt),
